@@ -1,9 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { useState } from 'react';
+import EditBlog from '../EditBlog';
 
-function VerticalBlog({ cardData }) {
+function CardDashboard({ cardData }) {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
-    <div className='vertical-content'>
+   <>
+   {modalOpen && <EditBlog setOpenModal={setModalOpen} />}
+     <div className='vertical-content'>
     <div className="vertical-card-image">
       <img src={cardData.image} alt="bruce image" />
     </div>
@@ -11,7 +15,7 @@ function VerticalBlog({ cardData }) {
       <h3>{cardData.title}</h3>
 
       <p className='description'>{cardData.description}</p>
-      <div className="card-bottom">
+      <div className="card-bottom-dashboard">
         <div className="vertical-card-date">
           <p>
             <span>By {cardData.author}</span>
@@ -20,13 +24,15 @@ function VerticalBlog({ cardData }) {
           </p>
         </div>
         <div className="vertical-read-more">
-          <Link to={`/Blog/${cardData.id}`}>Read More</Link>
+         <button className='action-btn edit' onClick={() => {setModalOpen(true);}}>Edit</button>
+         <button className='action-btn'>Delete</button>
+         
            </div>
         </div>
       </div>
     </div>
+   </>
   );
 }
 
-export default VerticalBlog;
-
+export default CardDashboard; 

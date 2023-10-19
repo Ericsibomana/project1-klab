@@ -1,33 +1,40 @@
-import React from 'react'
-import bruce from '../components/image/bruce.jpg'
-function Card() {
+import React from 'react';
+import bruce from '../components/image/bruce.jpg';
+import { Link } from "react-router-dom";
+
+function Card({ cardData }) {
+  const blogId = cardData._id; // Define and set the value of blogId
   return (
     <div className='card-content'>
-        <div className="card-image">
-           <img src={bruce} alt="bruce image" />
+      <div className="card-image">
+        <img src={cardData.PostImage} alt="bruce image" />
+      </div>
+      <div className="card-right-side">
+        <h3>{cardData.PostTitle}</h3>
+        <div className="line">
+          <hr />
         </div>
-        <div className="card-right-side">
-            <h3>Woman stretching</h3>
-            <div className="line">
-                <hr />
-            </div>
-            <p>For many people, stretching exercises probably fall<br/> on the “things I should do but don't” list...</p>
-            <p>For many people, stretching exercises probably fall<br/> on the “things I should do but don't” list...</p>
-            <div className="card-bottom">
-                <div className="card-date">
-                    <p>
-                        <span>By Eric</span>
-                        <span> | </span>
-                        <span>Nov 01</span>
-                    </p>
-                </div>
-                <div className="read-more">
-                    <button>Read More </button>
-                </div>
-            </div>
+        <div className="card-description">
+            <p>{cardData.PostContent.substring(0, 150)}...</p>
         </div>
+        <div className="card-bottom">
+          <div className="card-date">
+            <p>
+              {/* <img src={cardData.creatorprofile} alt="profile" className='creatorProfile'/> */}
+              <span>By {cardData.creator}</span>
+              <span> | </span>
+              <span>{cardData.PostedDate.substring(0, 10)}</span>
+            </p>
+          </div>
+          <div className="read-more">
+            <Link to={`/Blog/${blogId}`}>
+            <button>Read More</button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;

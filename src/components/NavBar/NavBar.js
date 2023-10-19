@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faHome, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import Modal from '../Modal';
 
 import "./NavBar.css";
+import '../Modal.css';
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
 
   return (
+    <>
     <header>
       <nav className="navbar">
         <div className="container">
@@ -45,15 +49,15 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/login">
-                  <button className="login">Login</button>
-                </Link>
+                  <button className="login"  onClick={() => {setModalOpen(true);}}>Login</button>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+    {modalOpen && <Modal setOpenModal={setModalOpen} />}
+    </>
   );
 };
 

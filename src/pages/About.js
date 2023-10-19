@@ -1,14 +1,18 @@
 import React from 'react'
-import AboutCard from '../components/AboutCard'
+import AboutCard from '../components/About/AboutCard'
 import Footer from '../components/Footer'
+import Navbar from '../components/NavBar/NavBar'
 function About() {
   return (
-    <div className="about-container">
+    <>
+    <Navbar />
+      <div className="about-container">
         <div className="AboutContainer">
         <AboutCard />
         <Footer />
         </div>
-    </div>
+    </div>    
+    </>
   )
 }
 
