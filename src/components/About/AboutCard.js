@@ -1,5 +1,5 @@
 import React from 'react'
-import profile from '../components/image/profile.jpg'
+import profile from '../image/profile.jpg'
 function AboutCard() {
   return (
     <div className="aboutContent">

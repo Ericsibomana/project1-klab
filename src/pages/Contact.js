@@ -1,11 +1,14 @@
 import React from 'react'
-import WelcomePage from '../components/WelcomePage'
-import ContactPage from '../components/ContactPage'
+import ContactPage from '../components/Contact/ContactPage'
+import ContactForm from '../components/Contact/ContactForm'
+import Navbar from '../components/NavBar/NavBar'
 
 function Contact() {
   return (
     <div>
+      <Navbar />
         <ContactPage />
+        <ContactForm />
     </div>
   )
 }

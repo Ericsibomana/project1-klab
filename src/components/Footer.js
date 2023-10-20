@@ -19,8 +19,8 @@ function Footer() {
         <hr />
         <div className="copyright">
             <p>
-                <span>Copyright © 2023</span>
-                <span>  </span>
+                <span>Copyright © 2023 </span>
+                <span> | </span>
                 <span> Designed by Eric</span>
             </p>
         </div>

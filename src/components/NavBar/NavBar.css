@@ -7,7 +7,6 @@ body {
   background-color: #fcfcfc;
 }
 
-
 .navbar {
   width: 100%;
   display: flex;
@@ -30,7 +29,6 @@ body {
 .logo-container {
   display: grid;
   grid-template-columns: 17% 80%;
-  /* background-color: blue; */
 }
 
 .logo {
@@ -58,7 +56,7 @@ body {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
-  /* background-color: red; */
+  margin: 25px 0;
 }
 
 .nav-elements ul li:not(:last-child) {
@@ -96,11 +94,18 @@ body {
   color: #ffffff;
 }
 
-@media (max-width: 768px) {
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+
+  /* Adjust styles for screens up to 1200px wide (e.g., tablets) */
   .nav-elements ul li:not(:last-child) {
     margin-right: 30px;
   }
+}
 
+@media (max-width: 768px) {
+
+  /* Adjust styles for screens up to 768px wide (e.g., smaller tablets and large mobile phones) */
   .container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -108,20 +113,26 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 780px) {
+
+  /* Adjust styles for screens up to 600px wide (e.g., most mobile phones) */
   .menu-icon {
     display: flex;
     cursor: pointer;
     justify-content: flex-end;
     align-items: flex-end;
     margin-bottom: 10px;
-    /* background-color: red; */
   }
 
   .container {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     width: 80%;
+  }
+
+  .logo-container {
+    display: grid;
+    grid-template-columns: 25% 80%;
   }
 
   .nav-elements {
@@ -147,5 +158,12 @@ body {
   .nav-elements ul li {
     margin-right: unset;
     margin-top: 22px;
+  }
+}
+
+@media (max-width: 390px) {
+  .logo-container {
+    display: grid;
+    grid-template-columns: 30% 80%;
   }
 }
