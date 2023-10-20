@@ -265,6 +265,12 @@ body {
     box-shadow: 0px 0px 4px;
 }
 
+.add-new-blog {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 4px;
+}
+
 .edit-content {
     width: 100%;
     background-color: #ffffff;
@@ -308,6 +314,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 20px auto;
+    cursor: pointer;
 }
 
 .CloseBtn {

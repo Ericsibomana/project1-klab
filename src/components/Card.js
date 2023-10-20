@@ -15,7 +15,7 @@ function Card({ cardData }) {
           <hr />
         </div>
         <div className="card-description">
-            <p>{cardData.PostContent.substring(0, 150)}...</p>
+            <p>{cardData.PostContent.substring(0, 220)}...</p>
         </div>
         <div className="card-bottom">
           <div className="card-date">

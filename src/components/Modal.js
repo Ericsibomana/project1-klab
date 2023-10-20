@@ -54,7 +54,7 @@ function Modal({ setOpenModal }) {
                 setPassword('')
                 setProfile('')
             } else {
-                console.error('Failed to create user.');
+               toast('Failed to create user.');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -79,7 +79,6 @@ function Modal({ setOpenModal }) {
                 setEmail('')
                 setPassword('')
 
-               
                 setTimeout(() => {
                     history.push('/dashboard');
                 }, 2000); // Redirect after a 2-second delay (adjust as needed)
