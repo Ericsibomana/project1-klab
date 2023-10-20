@@ -20,6 +20,8 @@ import React, { useState, useEffect } from 'react';
 import Card from './Card';
 
 function Blogs() {
+  // Declaring useState 
+  // Declaring useState 
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
