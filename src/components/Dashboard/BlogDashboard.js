@@ -3,7 +3,6 @@ import CardDashboard from './CardDashboard';
 import { cardDataArray } from '../api';
 import { useState, useEffect } from 'react';
 
-
 function BlogDashboard() {
   const [posts, setPosts] = useState([])
 
@@ -15,6 +14,9 @@ function BlogDashboard() {
                 setPosts(res.data)
             }
         })
+        // .catch(err =>{
+        //   console.log(err.message);
+        // });
 }, [])
   return (
 

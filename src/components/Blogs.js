@@ -21,7 +21,8 @@ import Card from './Card';
 
 function Blogs() {
   // Declaring useState 
-  // Declaring useState 
+  // Declaring useState
+  // jkjkj
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
