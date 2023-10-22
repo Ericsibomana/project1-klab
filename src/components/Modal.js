@@ -42,7 +42,7 @@ function Modal({ setOpenModal }) {
   
     const handlesignup = async (data) => {
         try {
-            const response = await fetch('https://my-first-blog-apis.onrender.com/api/myblog/users/signup', {
+            const response = await fetch('https://my-first-blog-apis.onrender.com/api/users/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

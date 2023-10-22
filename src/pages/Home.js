@@ -12,9 +12,8 @@ function Home() {
       <Navbar />
       <WelcomePage />
       <Blogs />
-      <VerticalCard />
-      <Double />
-      <LatestBlog />
+      {/* <Double /> */}
+      {/* <LatestBlog /> */}
       <Footer />
     </div>
   );

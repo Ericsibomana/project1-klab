@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2c2622 (change)
 import React from "react";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +30,6 @@ function AddNew({ setOpenModal }) {
       const token = localStorage.getItem('token');
 
       if (!token) {
-        // Handle the case where the user is not authenticated
         toast("You are not authenticated. Please log in.");
         return;
       }
@@ -35,7 +37,6 @@ function AddNew({ setOpenModal }) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // Include the user's token in the Authorization header
                  'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(data), // Use FormData directly without wrapping it in an object

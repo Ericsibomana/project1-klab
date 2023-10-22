@@ -385,7 +385,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 999;
     text-align: center;
+<<<<<<< HEAD
     border: 5px solid #7F0101;
+=======
+>>>>>>> f2c2622 (change)
 }
 
 .delete-confirmation p {
@@ -394,7 +397,11 @@ body {
 }
 
 .delete-confirmation button {
+<<<<<<< HEAD
     background-color: #7F0101;
+=======
+    background-color: #dc3545;
+>>>>>>> f2c2622 (change)
     /* Red color */
     color: #fff;
     border: none;
@@ -405,6 +412,10 @@ body {
 }
 
 .delete-confirmation button:hover {
+<<<<<<< HEAD
     background-color: #7F0101;
+=======
+    background-color: #c82333;
+>>>>>>> f2c2622 (change)
     /* Darker red on hover */
 }

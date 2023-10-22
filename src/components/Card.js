@@ -5,17 +5,21 @@ import { Link } from "react-router-dom";
 function Card({ cardData }) {
   const blogId = cardData._id; // Define and set the value of blogId
   return (
-    <div className='card-content'>
+    <div className='vertical-content'>
       <div className="card-image">
         <img src={cardData.PostImage} alt="bruce image" />
       </div>
-      <div className="card-right-side">
+      <div className="vertical-right-side">
         <h3>{cardData.PostTitle}</h3>
         <div className="line">
           <hr />
         </div>
         <div className="card-description">
+<<<<<<< HEAD
             <p>{cardData.PostContent.substring(0, 200)}...</p>
+=======
+            <p>{cardData.PostContent.substring(0, 100)}...</p>
+>>>>>>> f2c2622 (change)
         </div>
         <div className="card-bottom">
           <div className="card-date">
@@ -26,10 +30,8 @@ function Card({ cardData }) {
               <span>{cardData.PostedDate.substring(0, 10)}</span>
             </p>
           </div>
-          <div className="read-more">
-            <Link to={`/Blog/${blogId}`}>
-            <button>Read More</button>
-            </Link>
+          <div className="vertical-read-more">
+            <Link to={`/Blog/${blogId}`}>Read More</Link>
           </div>
         </div>
       </div>
