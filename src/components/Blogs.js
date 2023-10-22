@@ -23,7 +23,7 @@ function Blogs() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-      fetch("https://my-first-blog-apis.onrender.com/api/myblog/blog/read")
+      fetch("https://my-first-blog-apis.onrender.com/api/posts/read")
           .then((response) => response.json())
           .then((res) => {
               if (res.data) {

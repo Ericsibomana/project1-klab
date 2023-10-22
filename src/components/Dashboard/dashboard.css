@@ -372,3 +372,39 @@ body {
     padding: 6px 20px;
     border-radius: 5px;
 }
+
+/* CSS for the delete confirmation dialog */
+.delete-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    text-align: center;
+    border: 5px solid #dc3545;
+}
+
+.delete-confirmation p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.delete-confirmation button {
+    background-color: #dc3545;
+    /* Red color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-confirmation button:hover {
+    background-color: #c82333;
+    /* Darker red on hover */
+}
