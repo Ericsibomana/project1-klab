@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EditBlog from '../EditBlog';
 
-// import toast
+// Import toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -106,13 +106,13 @@ function CardDashboard({ cardData }) {
           </div>
           <div className="vertical-right-side">
             <h3>{cardData.PostTitle}</h3>
-            <p className='description'>{cardData.PostContent.substring(0, 200)}...</p>
+            <p className='description'>{cardData.PostContent ? cardData.PostContent.substring(0, 200) : ''}...</p>
             <div className="card-bottom-dashboard">
               <div className="vertical-card-date">
                 <p>
                   <span>By {cardData.creator}</span>
                   <span> | </span>
-                  <span>{cardData.PostedDate.substring(0, 10)}</span>
+                  <span>{cardData.PostedDate ? cardData.PostedDate.substring(0, 10) : ''}</span>
                 </p>
               </div>
               <div className="vertical-read-more">

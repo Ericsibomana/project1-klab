@@ -16,10 +16,14 @@ function Card({ cardData }) {
         </div>
         <div className="card-description">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <p>{cardData.PostContent.substring(0, 200)}...</p>
 =======
             <p>{cardData.PostContent.substring(0, 100)}...</p>
 >>>>>>> f2c2622 (change)
+=======
+            <p>{cardData.PostContent ? cardData.PostContent.substring(0, 100) : ''}...</p>
+>>>>>>> cdbd02f (fix on create new posts)
         </div>
         <div className="card-bottom">
           <div className="card-date">
@@ -27,7 +31,7 @@ function Card({ cardData }) {
               {/* <img src={cardData.creatorprofile} alt="profile" className='creatorProfile'/> */}
               <span>By {cardData.creator}</span>
               <span> | </span>
-              <span>{cardData.PostedDate.substring(0, 10)}</span>
+              <span>{cardData.PostedDate ? cardData.PostedDate.substring(0, 10) : ''}</span>
             </p>
           </div>
           <div className="vertical-read-more">

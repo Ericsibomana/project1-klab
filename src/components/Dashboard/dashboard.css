@@ -386,9 +386,13 @@ body {
     z-index: 999;
     text-align: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
     border: 5px solid #7F0101;
 =======
 >>>>>>> f2c2622 (change)
+=======
+    border: 3px solid #7F0101;
+>>>>>>> cdbd02f (fix on create new posts)
 }
 
 .delete-confirmation p {
@@ -398,10 +402,14 @@ body {
 
 .delete-confirmation button {
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-color: #7F0101;
 =======
     background-color: #dc3545;
 >>>>>>> f2c2622 (change)
+=======
+    background-color: #7F0101;
+>>>>>>> cdbd02f (fix on create new posts)
     /* Red color */
     color: #fff;
     border: none;
@@ -413,9 +421,13 @@ body {
 
 .delete-confirmation button:hover {
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-color: #7F0101;
 =======
     background-color: #c82333;
 >>>>>>> f2c2622 (change)
+=======
+    background-color: #7F0101;
+>>>>>>> cdbd02f (fix on create new posts)
     /* Darker red on hover */
 }
