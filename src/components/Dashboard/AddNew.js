@@ -1,46 +1,5 @@
-// import React, { useState } from 'react';
-// import DashboardNavBar from './DashboardNavBar';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
-// function AddNew() {
- 
-//   return (
-//     <div>
-//       <DashboardNavBar />
-//       <section className='section-two'>
-        // <div className="add-new-container">
-        //   <div className="add-new-content">
-        //     <div className="add-new-header">
-        //       <h1>Add new blog</h1>
-        //     </div>
-        //     <div className="add-new-form">
-        //       <form action="">
-        //         <div className="input-image">
-        //           <input type="file" name="image" placeholder='upload image' />
-        //         </div>
-        //         <div className="input-title">
-        //           <input type="text" name="title" placeholder='Title'/>
-        //         </div>
-        //         <div className="input-content">
-        //           <textarea name="content" placeholder='Content' />
-        //         </div>
-        //         <div className="add-new-btn add">
-        //           <button> <p>Add New</p> <FontAwesomeIcon icon={faPlus} className='plus-icon' /></button>
-        //         </div>
-        //       </form>
-        //     </div>
-        //   </div>
-        // </div>
-//       </section>
-//     </div>
-//   );
-// }
-
-// export default AddNew;
 
 import React from "react";
-// import "../components/NavBar/";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -53,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AddNew({ setOpenModal }) {
 
-  const [PostImage, setPostImage] = useState('');
+  const [PostImage, setPostImage] = useState(null);
     const [PostTitle, setPostTitle] = useState();
     const [PostContent, setPostContent] = useState('');
 
@@ -72,7 +31,7 @@ function AddNew({ setOpenModal }) {
         toast("You are not authenticated. Please log in.");
         return;
       }
-        const response = await fetch('https://my-first-blog-apis.onrender.com/api/myblog/blog/create', {
+        const response = await fetch('https://my-first-blog-apis.onrender.com/api/posts/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +45,7 @@ function AddNew({ setOpenModal }) {
             const data = await response.json();
             console.log('Response:', data);
             toast("Blog are created successfully!")
-            setPostImage('')
+            setPostImage(null)
             setPostTitle('')
             setPostContent('')
         } else {
@@ -111,7 +70,7 @@ function AddNew({ setOpenModal }) {
             <div className="add-new-form">
               <form >
                 <div className="input-image">
-                  <input type="file" name="image" placeholder='upload image' value={PostImage} onChange={(e) => setPostImage(e.target.value)}/>
+                <input type="file" name="image" onChange={(e) => setPostImage(e.target.files[0])} />
                 </div>
                 <div className="input-title">
                   <input type="text" name="title" placeholder='Title' value={PostTitle} onChange={(e) => setPostTitle(e.target.value)}/>

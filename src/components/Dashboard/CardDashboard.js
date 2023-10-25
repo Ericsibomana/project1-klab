@@ -2,9 +2,42 @@ import React from 'react'
 import { useState } from 'react';
 import EditBlog from '../EditBlog';
 
+// import toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function CardDashboard({ cardData }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [deleting, setDeleting] = useState(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+  const handleDelete = () => {
+    const token = localStorage.getItem('token');
+    // Close the delete confirmation dialog
+    setDeleteConfirmationOpen(false);
+
+    if (!token) {
+      toast("You are not authenticated. Please log in.");
+      return;
+    }
+    fetch(`https://my-first-blog-apis.onrender.com/api/posts/delete/${cardData._id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          toast ("Blog deleted successfully!!");
+        } else {
+          console.error('Failed to delete the blog.');
+        }
+      })
+      .catch(error => {
+        console.error('Error while deleting the blog:', error);
+      });
+  };
+
   
   return (
    <>
@@ -28,13 +61,22 @@ function CardDashboard({ cardData }) {
         </div>
         <div className="vertical-read-more">
          <button className='action-btn edit' onClick={() => {setModalOpen(true);}}>Edit</button>
-         <button className='action-btn'>Delete</button>
+         <button className='action-btn' onClick={() => setDeleteConfirmationOpen(true)}>Delete</button>
          
            </div>
         </div>
       </div>
     </div>
+    <ToastContainer />
     </div>
+    {/* Delete confirmation dialog */}
+    {deleteConfirmationOpen && (
+        <div className="delete-confirmation">
+          <p>Are you sure you want to delete this blog?</p>
+          <button onClick={handleDelete}>Yes</button>
+          <button onClick={() => setDeleteConfirmationOpen(false)}>No</button>
+        </div>
+      )}
    </>
   );
 }

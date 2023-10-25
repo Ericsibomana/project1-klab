@@ -33,6 +33,12 @@ function Modal({ setOpenModal }) {
         email,
         password,
     };
+
+    // form validationForm
+    function validateForm() {
+       
+    }
+    // end function for validationForm
   
     const handlesignup = async (data) => {
         try {
@@ -59,11 +65,107 @@ function Modal({ setOpenModal }) {
         } catch (error) {
             console.error('Error:', error);
         }
+
+        if (firstname.length == 0) {
+            toast('Invalid Form, First Name can not be empty')
+            return
+          }
+        if (lastname.length == 0) {
+            toast('Invalid Form, Last Name can not be empty')
+            return
+          }
+          if (email.length == 0) {
+            toast('Invalid Form, Email Address can not be empty')
+            return
+          }
+          if (password.length < 8) {
+            toast(
+              'Invalid Form, Password must contain greater than or equal to 8 characters.',
+            )
+            return
+          }
+          
+    // variable to count upper case characters in the password.
+    let countUpperCase = 0
+    // variable to count lowercase characters in the password.
+    let countLowerCase = 0
+    // variable to count digit characters in the password.
+    let countDigit = 0
+    // variable to count special characters in the password.
+    let countSpecialCharacters = 0
+
+    for (let i = 0; i < password.length; i++) {
+      const specialChars = [
+        '!',
+        '@',
+        '#',
+        '$',
+        '%',
+        '^',
+        '&',
+        '*',
+        '(',
+        ')',
+        '_',
+        '-',
+        '+',
+        '=',
+        '[',
+        '{',
+        ']',
+        '}',
+        ':',
+        ';',
+        '<',
+        '>',
+      ]
+
+      if (specialChars.includes(password[i])) {
+        // this means that the character is special, so increment countSpecialCharacters
+        countSpecialCharacters++
+      } else if (!isNaN(password[i] * 1)) {
+        // this means that the character is a digit, so increment countDigit
+        countDigit++
+      } else {
+        if (password[i] == password[i].toUpperCase()) {
+          // this means that the character is an upper case character, so increment countUpperCase
+          countUpperCase++
+        }
+        if (password[i] == password[i].toLowerCase()) {
+          // this means that the character is lowercase, so increment countUpperCase
+          countLowerCase++
+        }
+      }
+    }
+
+    if (countLowerCase == 0) {
+      // invalid form, 0 lowercase characters
+      alert('Invalid Form, 0 lower case characters in password')
+      return
+    }
+
+    if (countUpperCase == 0) {
+      // invalid form, 0 upper case characters
+      alert('Invalid Form, 0 upper case characters in password')
+      return
+    }
+
+    if (countDigit == 0) {
+      // invalid form, 0 digit characters
+      alert('Invalid Form, 0 digit characters in password')
+      return
+    }
+
+    if (countSpecialCharacters == 0) {
+      // invalid form, 0 special characters characters
+      alert('Invalid Form, 0 special characters in password')
+      return
+    }
     };
 
     const handleLogin = async (data) => {
         try {
-            const response = await fetch('https://my-first-blog-apis.onrender.com/api/myblog/users/login', {
+            const response = await fetch('https://my-first-blog-apis.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +173,17 @@ function Modal({ setOpenModal }) {
                 body: JSON.stringify(data), // Use FormData directly without wrapping it in an object
             });
 
-            if (response.ok) {
+            if (email.length == 0) {
+                toast('Email Address can not be empty')
+                return
+              }
+              else if (password.length < 8) {
+                toast(
+                  'Password can not be empty',
+                )
+                return
+              }
+            else if (response.ok) {
                 const data = await response.json();
                 toast("Login successfully")
                 // console.log('Response:', data);
@@ -88,6 +200,7 @@ function Modal({ setOpenModal }) {
         } catch (error) {
             console.error('Error:', error);
         }
+
     };
   return (
     <div className="modalBackground">
@@ -131,10 +244,12 @@ function Modal({ setOpenModal }) {
                             {action === "SignUp Form" ? <div></div> : <button className={action === "Sign Up" ? "signupLogin gray" : "signupLogin"} type="submit" onClick={(e) => {
                         e.preventDefault()
                         handleLogin(LoginData)
+                        validateForm()
                 }}>Login</button>}
                         {action === "Login Form" ? <div></div> : <button className={action === "Login" ? "signupLogin gray" : "signupLogin"} type="submit" onClick={(e) => {
                         e.preventDefault()
                     handlesignup(FormData)
+                    validateForm()
                 }}>Sign Up</button>}
                         </div>
                         {action === "SignUp Form" ? <div></div> : <p>Don't have account? <span onClick={() => { setAction("SignUp Form") }} className='span'>SIGN UP HERE</span></p>}
