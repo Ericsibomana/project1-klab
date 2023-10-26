@@ -1,118 +1,134 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+// import "../components/NavBar/";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { async } from "q";
 
-function Modal({ setOpenModal, _id }) {
-  const [PostTitle, setPostTitle] = useState("");
-  const [PostImage, setPostImage] = useState(null);
-  const [content, setContent] = useState("");
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-  useEffect(() => {
-    // Fetch the existing blog post data when the modal is opened
-    axios.get(`https://my-first-blog-apis.onrender.com/api/posts/update/${_id}`)
-      .then((response) => {
-        const { PostTitle, content } = response.data;
-        setPostTitle(PostTitle);
-        setContent(content);
-        // You can set the image field as well if it's a file input.
-      })
-      .catch((error) => {
-        console.error("Error fetching post data:", error);
-      });
-  }, [_id]);
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
+function Modal({ setOpenModal }) {
+  const [PostTitle, setTitle] = useState("");
+  const [PostImage, setIfoto] = useState("");
+  const [PostContent, setContent] = useState("");
 
-    const token = localStorage.getItem("token");
+  const identity = localStorage.getItem('id')
+  const [singlez, setSingle] = useState({})
+  console.log("All Singlez:  ", singlez);
 
-    if (!token) {
-      // Handle unauthenticated user
-      console.error("User is not authenticated.");
-      return;
-    }
+  const token = localStorage.getItem('token');
 
-    const formData = new FormData();
-    formData.append("PostTitle", PostTitle);
-    formData.append("PostImage", setPostImage); // Assuming image is a File object
-    formData.append("content", content);
+  console.log("Token =", token);
 
-    axios
-      .put(`https://my-first-blog-apis.onrender.com/api/posts/update//${_id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          // Handle success, e.g., close the modal
-          setOpenModal(false);
-        } else {
-          console.error("Failed to update the blog post.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating the blog post:", error);
-      });
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
 
+  
+
+  useEffect(() => {
+    // fetching data for single blog
+    const singleBlog = async () => {
+      
+      console.log("identity", identity);
+      const all = await axios.get(
+        `https://my-first-blog-apis.onrender.com/api/posts/read/${identity}`
+      );
+
+      const result = all.data.data;
+     
+      setSingle(result);
+    };
+    singleBlog();
+  }, []);
+
+const handleUpdate = async (e) => {
+  e.preventDefault();
+
+  const imageInput = document.getElementById("imageInput");
+  const PostImage = imageInput.files[0];
+
+  const formData = new FormData();
+  formData.append("PostTitle", PostTitle);
+  formData.append("PostImage", PostImage);
+  formData.append("PostContent", PostContent);
+
+  try {
+    const response = await axios.put(
+      `https://my-first-blog-apis.onrender.com/api/posts/update/${identity}`,
+      formData,
+      config
+    );
+
+    console.log(response);
+
+    if (response.status === 201) {
+      toast("Blog has been updated successfully!");
+      window.location.reload();
+    } else {
+      toast("Failed to update the blog.");
+    }
+  } catch (error) {
+    console.error(error);
+    toast("Failed to update the blog.");
+  }
+};
+    
   return (
     <div className="modalBackgroundEdit">
       <div className="modalContainer">
-        <div className="edit-container">
+      <div className="edit-container">
           <div className="edit-content">
             <div className="add-new-header">
               <h4>Edit Blog</h4>
               <div className="CloseBtn">
-                <FontAwesomeIcon
-                  icon={faTimes}
-                  className="close-icon edit-close"
-                  onClick={() => {
-                    setOpenModal(false);
-                  }}
-                />
-              </div>
+          <FontAwesomeIcon icon={faTimes} className="close-icon edit-close" onClick={() => {setOpenModal(false);}} />
+        </div>
             </div>
             <div className="add-new-form">
-              <form onSubmit={handleUpdate}>
+              <form action="">
                 <div className="input-image">
                   <input
                     type="file"
                     name="image"
-                    accept="image/*"
-                    onChange={(e) => setPostImage(e.target.files[0])}
+                    id="imageInput" accept="image/*" 
+                    onChange={(e) => setIfoto(e.target.value)}
                   />
                 </div>
                 <div className="input-title">
                   <input
                     type="text"
                     name="title"
-                    placeholder="Title"
-                    value={PostTitle}
-                    onChange={(e) => setPostTitle(e.target.value)}
+                    value={PostTitle ? PostTitle: singlez.PostTitle}
+                    placeholder='Title'
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
                 <div className="input-content">
                   <textarea
                     name="content"
-                    placeholder="Content"
-                    value={content}
+                    placeholder='Content'
+                    value={PostContent ? PostContent : singlez.PostContent}
                     onChange={(e) => setContent(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="add-new-btn add">
-                  <button>
+                  <button onClick={handleUpdate}>
                     <p>Save</p>
-                    <FontAwesomeIcon icon={faPlus} className="plus-icon" />
+                    <FontAwesomeIcon icon={faPlus} className='plus-icon' />
                   </button>
                 </div>
               </form>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
+      <ToastContainer />
     </div>
   );
 }

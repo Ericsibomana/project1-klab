@@ -5,7 +5,7 @@ import EditBlog from '../EditBlog';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function CardDashboard({ cardData }) {
+function CardDashboard({ cardData, getSingleBlog }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 <<<<<<< HEAD
@@ -116,7 +116,8 @@ function CardDashboard({ cardData }) {
                 </p>
               </div>
               <div className="vertical-read-more">
-                <button className='action-btn edit' onClick={() => {setModalOpen(true);}}>Edit</button>
+                <button className='action-btn edit' onClick={() => {setModalOpen(true);
+                localStorage.setItem("id", cardData._id)}}>Edit</button>
                 <button className='action-btn' onClick={() => setDeleteConfirmationOpen(true)}>Delete</button>
               </div>
             </div>

@@ -80,8 +80,8 @@ function AddNew({ setOpenModal }) {
     } catch (error) {
       console.log(error);
       toast("Failed to create a Blog ")
-    }
-  };
+    }
+ };
 
 
     

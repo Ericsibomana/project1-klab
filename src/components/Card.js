@@ -1,6 +1,8 @@
 import React from 'react';
 import bruce from '../components/image/bruce.jpg';
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
 
 function Card({ cardData }) {
   const blogId = cardData._id; // Define and set the value of blogId
@@ -37,6 +39,9 @@ function Card({ cardData }) {
           <div className="vertical-read-more">
             <Link to={`/Blog/${blogId}`}>Read More</Link>
           </div>
+        </div>
+        <div className="view">
+          <p>Views <FontAwesomeIcon icon={faEye} /> {cardData.views}</p>
         </div>
       </div>
     </div>

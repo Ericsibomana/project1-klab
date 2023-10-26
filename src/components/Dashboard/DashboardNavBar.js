@@ -27,7 +27,13 @@ const DashboardNavBar = () => {
             <FontAwesomeIcon icon={faBars} size="2x" />
           </div>
           <div className={`nav-elements ${showNavbar && "active"}`}>
-            <ul>   
+            <ul className="nav-link">  
+             <li >
+             <Link to="/chart">Dashboard</Link>
+             </li>
+             <li className="link">
+             <Link to="/dashboard">Manage-Post</Link>
+             </li>
               <li>
                 <Link to="/contact" className='profile'>
                  <div className="profile-container">

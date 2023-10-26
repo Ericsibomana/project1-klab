@@ -11,6 +11,7 @@ import LoginSignup from "./pages/LoginSignup";
 import SingleBlog from "./components/SingleBlog";
 import Dashboard from "./pages/Dashboard";
 import AddNew from "./components/Dashboard/AddNew";
+import Chart from "./components/Dashboard/Chart";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Blog/:_id" component={SingleBlog} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/add new blog" component={AddNew} />
+          <Route path="/chart" component={Chart} />
         </Switch>
       </div>
     </Router>
