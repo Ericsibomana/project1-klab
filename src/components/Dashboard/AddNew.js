@@ -3,15 +3,21 @@
 =======
 >>>>>>> f2c2622 (change)
 import React from "react";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+// import "../components/NavBar/";
+import { useState, useMemo } from "react";
+>>>>>>> 63b6e2a (commit change)
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 // import Toast component
 
+import JoditEditor from 'jodit-react';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 function AddNew({ setOpenModal }) {
 
@@ -23,7 +29,11 @@ function AddNew({ setOpenModal }) {
   const [PostTitle, setTitle] = useState("");
   const [PostImage, setIfoto] = useState("");
   const [PostContent, setContent] = useState("");
+<<<<<<< HEAD
 >>>>>>> cdbd02f (fix on create new posts)
+=======
+  console.log("post content : ", PostContent);
+>>>>>>> 63b6e2a (commit change)
 
   console.log(PostImage);
 
@@ -37,8 +47,11 @@ function AddNew({ setOpenModal }) {
     },
   };
 
+  const handleEditorChange = (content) => {
+    setContent(content);
+  };
 
-  const createBlog = async (e) => {
+  const createComment = async (e) => {
     e.preventDefault();
 
     // Assuming you have the file input element with the ID "imageInput" in your HTML
@@ -82,9 +95,7 @@ function AddNew({ setOpenModal }) {
       toast("Failed to create a Blog ")
     }
  };
-
-
-    
+ 
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -109,10 +120,14 @@ function AddNew({ setOpenModal }) {
                   <input type="text" name="title" placeholder='Title' value={PostTitle} onChange={(e) => setTitle(e.target.value)}/>
                 </div>
                 <div className="input-content">
-                  <textarea name="content" placeholder='Content' value={PostContent} onChange={(e) => setContent(e.target.value)}/>
+                  {/* <textarea name="content" placeholder='Content' value={PostContent} onChange={(e) => setContent(e.target.value)}/> */}
+                  <JoditEditor
+                    value={PostContent}
+                    onChange={handleEditorChange}
+		              />
                 </div>
                 <div className="add-new-btn add">
-                  <button type="submit" onClick={createBlog}> <p>Add New</p> <FontAwesomeIcon icon={faPlus} className='plus-icon' /></button>
+                  <button type="submit" onClick={createComment}> <p>Add New</p> <FontAwesomeIcon icon={faPlus} className='plus-icon' /></button>
                 </div>
               </form>
             </div>

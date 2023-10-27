@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import EditBlog from '../EditBlog';
+// import parse from 'html-react-parser';
 
 // Import toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function CardDashboard({ cardData, getSingleBlog }) {
+function CardDashboard({ cardData}) {
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 <<<<<<< HEAD
@@ -87,7 +88,9 @@ function CardDashboard({ cardData, getSingleBlog }) {
       .then(response => {
         if (response.ok) {
           toast("Blog deleted successfully!!");
-        } else {
+          window.location.reload();
+        } 
+        else {
           console.error('Failed to delete the blog.');
         }
       })
