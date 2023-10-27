@@ -29,21 +29,21 @@ const DashboardNavBar = () => {
           <div className={`nav-elements ${showNavbar && "active"}`}>
             <ul className="nav-link">  
              <li >
-             <Link to="/chart">Dashboard</Link>
+             <Link to="/chart">DASHBOARD</Link>
              </li>
              <li className="link">
-             <Link to="/dashboard">Manage-Post</Link>
+             <Link to="/dashboard">POST</Link>
              </li>
               <li>
                 <Link to="/contact" className='profile'>
                  <div className="profile-container">
-                 Profile <FontAwesomeIcon icon={faUser} className="user-icon"/>
+                 PROFILE <FontAwesomeIcon icon={faUser} className="user-icon"/>
                  </div>
                 </Link>
               </li>
               <li>
                 <Link to="/">
-                  <button className="login">Logout</button>
+                  LOGOUT
                 </Link>
               </li>
             </ul>

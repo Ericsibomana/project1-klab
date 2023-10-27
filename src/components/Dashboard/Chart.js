@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import DashboardNavBar from './DashboardNavBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// import chart libraries
+import { PureComponent } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 import {
   faUser,
   faComment,
@@ -9,36 +14,32 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 function Chart() {
-  const [data, setData] = useState({
-    users: 0,
-    posts: 0,
-    views: 0,
-    comments: 0
-  });
 
-  useEffect(() => {
-    // Make an API request to fetch the data
-    fetch('https://my-first-blog-apis.onrender.com/api/Posts')
-      .then((response) => response.json())
-      .then((apiData) => {
-        // Count the number of users, posts, views, and comments
-        const users = apiData.length;
-        const posts = users;
-        const views = apiData.reduce((totalViews, post) => totalViews + post.views, 0);
-        const comments = apiData.reduce((totalComments, post) => totalComments + post.comment.length, 0);
-
-        // Update the state with the numbers
-        setData({
-          users,
-          posts,
-          views,
-          comments
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  const data = [
+    {
+      name: 'User',
+      uv: 10,
+      value: 80,
+      amt: 2400,
+    },
+    {
+      name: 'Post',
+      uv: 10,
+      value: 50,
+      amt: 2210,
+    },
+    {
+      name: 'View',
+      value: 80,
+    },
+    {
+      name: 'Comment',
+      uv: 10,
+      value: 100,
+      amt: 2000,
+    },
+  
+  ];
 
   return (
     <>
@@ -54,7 +55,7 @@ function Chart() {
               <div className="card-inner">
                 <h2>User</h2>
                 <h1>
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} className='card-icon'/>
                 </h1>
               </div>
               <h1>{data.users}</h1>
@@ -64,7 +65,7 @@ function Chart() {
               <div className="card-inner">
                 <h2>Post</h2>
                 <h1>
-                  <FontAwesomeIcon icon={faNewspaper} />
+                  <FontAwesomeIcon icon={faNewspaper} className='card-icon'/>
                 </h1>
               </div>
               <h1>{data.posts}</h1>
@@ -74,7 +75,7 @@ function Chart() {
               <div className="card-inner">
                 <h2>View</h2>
                 <h1>
-                  <FontAwesomeIcon icon={faEye} />
+                  <FontAwesomeIcon icon={faEye} className='card-icon'/>
                 </h1>
               </div>
               <h1>{data.views}</h1>
@@ -84,12 +85,32 @@ function Chart() {
               <div className="card-inner">
                 <h2>Comment</h2>
                 <h1>
-                  <FontAwesomeIcon icon={faComment} />
+                  <FontAwesomeIcon icon={faComment} className='card-icon'/>
                 </h1>
               </div>
               <h1>{data.comments}</h1>
             </div>
           </div>
+          <div className="graphic-chart">
+        <BarChart
+          width={800}
+          height={400}
+          data={data}
+          margin={{
+            top: 10,
+            right: 30,
+            bottom: 5,
+          }}
+          barSize={20}
+        >
+          <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Bar dataKey="value" fill="#7F0101" background={{ fill: '#eee' }} />
+        </BarChart>
+        </div>
         </div>
       </section>
     </>

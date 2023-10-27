@@ -361,9 +361,35 @@ body {
 
 .comment-header {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     justify-content: center;
     align-items: center;
+}
+
+.comment-header h4 {
+    margin-top: -.1rem;
+}
+
+.comment-header p {
+    margin-top: 5px;
+}
+
+.comment-message {
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+    height: auto;
+    margin-top: -.7rem;
+    border-radius: 5px;
+    background-color: #fefefe;
+}
+
+.comment-content {
+    background-color: hsla(240, 5%, 92%, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 4px 0;
+    border-radius: 5px;
+    height: auto;
+    padding: 10px;
+
 }
 
 .comment-name {
@@ -476,6 +502,10 @@ body {
     box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.4);
     background-color: #fefefe;
     border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.card-icon {
+    color: #7F0101;
 }
 
 
