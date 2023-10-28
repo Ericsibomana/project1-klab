@@ -70,7 +70,6 @@ function CardDashboard({ cardData}) {
   const handleDelete = () => {
     // Close the delete confirmation dialog
     setDeleteConfirmationOpen(false);
-
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -109,7 +108,7 @@ function CardDashboard({ cardData}) {
           </div>
           <div className="vertical-right-side">
             <h3>{cardData.PostTitle}</h3>
-            <p className='description'>{cardData.PostContent ? cardData.PostContent.substring(0, 200) : ''}...</p>
+            <p className='description' dangerouslySetInnerHTML={{__html: cardData.PostContent ? cardData.PostContent.substring(0, 200) : '' }} ></p>
             <div className="card-bottom-dashboard">
               <div className="vertical-card-date">
                 <p>

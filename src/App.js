@@ -1,17 +1,23 @@
 // Import necessary modules
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
-// import Navbar from "./components/NavBar/NavBar";
 import Home from "./pages/Home";
 import "./App.css";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import LoginSignup from "./pages/LoginSignup";
 import SingleBlog from "./components/SingleBlog";
 import Dashboard from "./pages/Dashboard";
 import AddNew from "./components/Dashboard/AddNew";
 import Chart from "./components/Dashboard/Chart";
+import ProtectedRoute from "./components/ProtectedRoute"; // Ensure you have this component defined
+
+const isAuthenticated = () => {
+  const token = localStorage.getItem("token");
+  return !!token;
+};
+
+const userRole = "user"; // Set the user's role (you can fetch this from the API response)
 
 function App() {
   return (
@@ -21,11 +27,25 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
-          {/* <Route path="/login" component={LoginSignup} /> */}
           <Route path="/Blog/:_id" component={SingleBlog} />
-          <Route path="/dashboard" component={Dashboard} />
           <Route path="/add new blog" component={AddNew} />
-          <Route path="/chart" component={Chart} />
+
+          {/* Protected routes for admin */}
+          <ProtectedRoute
+            path="/chart"
+            component={Chart}
+            isAuthenticated={isAuthenticated()}
+            userRole={userRole}
+          />
+          <ProtectedRoute
+            path="/dashboard"
+            component={Dashboard}
+            isAuthenticated={isAuthenticated()}
+            userRole={userRole}
+          />
+
+          {/* Redirect to login if no matching route */}
+          <Redirect to="/" />
         </Switch>
       </div>
     </Router>

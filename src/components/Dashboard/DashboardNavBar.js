@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars,faUser} from "@fortawesome/free-solid-svg-icons";
 
@@ -10,6 +10,16 @@ const DashboardNavBar = () => {
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
+  };
+
+  const history = useHistory();
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+      localStorage.removeItem("token");
+      history.push("/");
+    }
   };
 
   return (
@@ -42,8 +52,8 @@ const DashboardNavBar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/">
-                  LOGOUT
+                <Link to="/" onClick={handleLogout}>
+                   LOGOUT
                 </Link>
               </li>
             </ul>

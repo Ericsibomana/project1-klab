@@ -4,7 +4,11 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faTimes } from "@fortawesome/free-solid-svg-icons";
 // import Navbar from '../components/NavBar/NavBar';
+<<<<<<< HEAD
 import { Link, useHistory } from "react-router-dom";
+=======
+import { useHistory } from "react-router-dom"
+>>>>>>> 5310ced (fix authentication and new features)
 
 // toast
 import { ToastContainer, toast } from "react-toastify";
@@ -265,43 +269,49 @@ function Modal({ setOpenModal }) {
     }
   };
 
-  const handleLogin = async (data) => {
-    try {
-      const response = await fetch(
-        "https://my-first-blog-apis.onrender.com/api/users/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data), // Use FormData directly without wrapping it in an object
-        }
-      );
-
-      if (email.length == 0) {
-        toast("Email can not be empty");
-        return;
-      } else if (password.length == 0) {
-        toast("Password can not be empty");
-        return;
-      } else if (response.ok) {
-        const data = await response.json();
-        toast("Login successfully");
-        // console.log('Response:', data);
-        localStorage.setItem("token", data.token);
-        setEmail("");
-        setPassword("");
-
-        setTimeout(() => {
-          history.push("/Chart");
-        }, 2000); // Redirect after a 2-second delay (adjust as needed)
-      } else {
-        toast("Invalid Email or Password");
+    const handleLogin = async (data) => {
+      try {
+          const response = await fetch('https://my-first-blog-apis.onrender.com/api/users/login', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+          });
+  
+          if (email.length == 0) {
+              toast('Email can not be empty');
+              return;
+          } else if (password.length == 0) {
+              toast('Password can not be empty');
+              return;
+          } else if (response.ok) {
+              const loginResponse = await response.json();
+              const userData = loginResponse.userModel;
+  
+              if (userData.role === "admin") {
+                  // Redirect to the dashboard for admin
+                  history.push('/dashboard');
+              } else if (userData.role === "user") {
+                  // Redirect to the home page for users
+                  history.push('/');
+              } else {
+                  // Handle other roles or scenarios as needed
+                  toast('Invalid role');
+              }
+  
+              toast("Login successful");
+              localStorage.setItem("token", loginResponse.token);
+              setEmail('');
+              setPassword('');
+          } else {
+              toast('Invalid Email or Password');
+          }
+      } catch (error) {
+          console.error('Error:', error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
+  
   return (
     <div className="modalBackground">
       <div className="modalContainer">
