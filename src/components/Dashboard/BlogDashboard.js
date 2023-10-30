@@ -1,6 +1,5 @@
 import React from 'react'
 import CardDashboard from './CardDashboard';
-import { cardDataArray } from '../api';
 import { useState, useEffect } from 'react';
 
 

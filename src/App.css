@@ -257,6 +257,12 @@ body {
   height: 520px;
 }
 
+.dashboard-card-content {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 4px;
+  height: 460px;
+}
+
 .vertical-card-image {
   padding: 15px;
 }
@@ -338,6 +344,11 @@ body {
   }
 
   .vertical-content {
+    width: 100%;
+    height: auto;
+  }
+
+  .dashboard-card-content {
     width: 100%;
     height: auto;
   }

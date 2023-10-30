@@ -102,7 +102,7 @@ function CardDashboard({ cardData}) {
     <>
       {modalOpen && <EditBlog setOpenModal={setModalOpen} />}
       <div>
-        <div className='vertical-content'>
+        <div className='dashboard-card-content'>
           <div className="vertical-card-image">
             <img src={cardData.PostImage} alt="bruce image" />
           </div>
