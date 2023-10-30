@@ -20,9 +20,6 @@ const SocialIcons = () => {
       <a href="https://www.linkedin.com">
         <FontAwesomeIcon icon={faLinkedin} size="2px" />
       </a>
-      {/* <a href="mailto:youremail@example.com">
-      <FontAwesomeIcon icon={faEnvelope} /> 
-      </a> */}
       <a href="https://www.pinterest.com">
         <FontAwesomeIcon icon={faPinterest} size="2px" />
       </a>
