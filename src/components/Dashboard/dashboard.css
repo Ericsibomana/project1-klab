@@ -424,18 +424,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 999;
     text-align: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    border: 5px solid #7F0101;
-=======
->>>>>>> f2c2622 (change)
-=======
-    border: 3px solid #7F0101;
->>>>>>> cdbd02f (fix on create new posts)
-=======
     border: 3px solid var(--main-bg-color);
->>>>>>> ff35009 (chart)
 }
 
 .delete-confirmation p {
@@ -444,20 +433,7 @@ body {
 }
 
 .delete-confirmation button {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    background-color: #7F0101;
-=======
-    background-color: #dc3545;
->>>>>>> f2c2622 (change)
-=======
-    background-color: #7F0101;
->>>>>>> cdbd02f (fix on create new posts)
-    /* Red color */
-=======
     background-color: var(--main-bg-color);
->>>>>>> ff35009 (chart)
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -467,19 +443,7 @@ body {
 }
 
 .delete-confirmation button:hover {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    background-color: #7F0101;
-=======
-    background-color: #c82333;
->>>>>>> f2c2622 (change)
-=======
-    background-color: #7F0101;
->>>>>>> cdbd02f (fix on create new posts)
-=======
     background-color: var(--main-bg-color);
->>>>>>> ff35009 (chart)
     /* Darker red on hover */
 }
 
@@ -570,16 +534,4 @@ body {
     display: flex;
     grid-template-columns: repeat(3, 1fr);
     margin-top: 15rem;
-}
-@media screen and (max-width:780px) {
-    .chart-container{
-        display: flex;
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-@media screen and (max-width:780px) {
-    .chart-container{
-        display: flex;
-        grid-template-columns: repeat(1, 1fr);
-    }
 }

@@ -1,12 +1,10 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState, useEffect } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
 
-const data = [
-  { name: "Users", value: 400 },
-  { name: "Post", value: 300 },
-  { name: "Comments", value: 300 },
-  { name: "Views", value: 200 },
-];
+const apiUrlPosts = "https://my-first-blog-apis.onrender.com/api/posts/read";
+const apiUrlUsers = "https://my-first-blog-apis.onrender.com/api/users/view";
+
+const token = localStorage.getItem("token");
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -81,40 +79,90 @@ const renderActiveShape = (props) => {
   );
 };
 
-export default class Piecharts extends PureComponent {
-  static demoUrl =
-    "https://codesandbox.io/s/pie-chart-with-customized-active-shape-y93si";
+const PieChartComponent = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [data, setData] = useState([
+    { name: "Users", value: 0 },
+    { name: "Post", value: 0 },
+    { name: "Comments", value: 0 },
+    { name: "Views", value: 0 },
+  ]);
 
-  state = {
-    activeIndex: 0,
+  useEffect(() => {
+    // Fetch posts data
+    fetch(apiUrlPosts)
+      .then((response) => response.json())
+      .then((postData) => {
+        const posts = postData.data;
+        const postsCount = posts.length;
+
+        let commentsCount = 0;
+        let viewsCount = 0;
+
+        // Loop through the posts to count comments and views
+        posts.forEach((post) => {
+          commentsCount += post.comment.length;
+          viewsCount += post.views;
+        });
+
+        // Update the data state with post counts
+        setData((prevData) => [
+          ...prevData,
+          { name: "Post", value: postsCount },
+          { name: "Views", value: viewsCount },
+          { name: "Comments", value: commentsCount },
+        ]);
+      })
+      .catch((error) => {
+        console.error("Error fetching post data:", error);
+      });
+
+    // Fetch users data to count users
+    fetch(apiUrlUsers, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`, // Include your authentication token here
+      },
+    })
+      .then((response) => response.json())
+      .then((userData) => {
+        const userCount = userData.data.length;
+
+        // Update the data state with user count
+        setData((prevData) => [
+          { name: "Users", value: userCount },
+          ...prevData,
+        ]);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
+  const onPieEnter = (_, index) => {
+    setActiveIndex(index);
   };
 
-  onPieEnter = (_, index) => {
-    this.setState({
-      activeIndex: index,
-    });
-  };
+  return (
+    <div style={{ width: "500px", height: "300px" }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart width={400} height={400}>
+          <Pie
+            activeIndex={activeIndex}
+            activeShape={renderActiveShape}
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
+            outerRadius={80}
+            fill="#7F0101"
+            dataKey="value"
+            onMouseEnter={onPieEnter}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div style={{ width: "400px", height: "300px" }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
-            <Pie
-              activeIndex={this.state.activeIndex}
-              activeShape={renderActiveShape}
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={80}
-              fill="#7F0101"
-              dataKey="value"
-              onMouseEnter={this.onPieEnter}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    );
-  }
-}
+export default PieChartComponent;

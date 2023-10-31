@@ -31,6 +31,10 @@ function Modal({ setOpenModal }) {
     profile,
   };
 
+  const LoginData = {
+    email,
+    password,
+  };
   // form validationForm
   function validateForm() {}
   // end function for validationForm

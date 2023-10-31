@@ -1,7 +1,4 @@
-import React from "react";
-// import { BarChart } from "recharts";
-// import chart libraries
-import { PureComponent } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -13,29 +10,86 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+const apiUrlPosts = "https://my-first-blog-apis.onrender.com/api/posts/read";
+const apiUrlUsers = "https://my-first-blog-apis.onrender.com/api/users/view";
+
+const token = localStorage.getItem("token");
+
 function Barchart() {
+  const [Data, setData] = useState({
+    userCount: 0,
+    postCount: 0,
+    viewCount: 0,
+    commentCount: 0,
+  });
+
+  useEffect(() => {
+    // Fetch posts data
+    fetch(apiUrlPosts)
+      .then((response) => response.json())
+      .then((postData) => {
+        const posts = postData.data;
+        const postsCount = posts.length;
+
+        let commentsCount = 0;
+        let viewsCount = 0;
+
+        // Loop through the posts to count comments and views
+        posts.forEach((post) => {
+          commentsCount += post.comment.length;
+          viewsCount += post.views;
+        });
+
+        // Update the data state with post counts
+        setData((prevData) => ({
+          ...prevData,
+          postCount: postsCount,
+          viewCount: viewsCount,
+          commentCount: commentsCount,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching post data:", error);
+      });
+
+    // Fetch users data to count users
+    fetch(apiUrlUsers, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`, // Include your authentication token here
+      },
+    })
+      .then((response) => response.json())
+      .then((userData) => {
+        const userCount = userData.data.length;
+
+        // Update the data state with user count
+        setData((prevData) => ({
+          ...prevData,
+          userCount,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
   const data = [
     {
       name: "Users",
-      uv: 10,
-      value: 13,
-      amt: 2400,
+      value: Data.userCount,
     },
     {
       name: "Posts",
-      uv: 10,
-      value: 7,
-      amt: 2210,
+      value: Data.postCount,
     },
     {
       name: "Views",
-      value: 464,
+      value: Data.viewCount,
     },
     {
       name: "Comments",
-      uv: 10,
-      value: 16,
-      amt: 2000,
+      value: Data.commentCount,
     },
   ];
 
