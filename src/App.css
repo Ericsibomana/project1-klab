@@ -1,3 +1,11 @@
+:root {
+  --main-bg-color: #7F0101;
+  --main-text-color: #ffffff;
+  --main-font-family: 'Poppins', sans-serif;
+  --main-font-lato: 'Lato', sans-serif;
+  --main-color-span: #6c6c6c;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -22,7 +30,7 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 .welcome h1 {
@@ -72,7 +80,7 @@ body {
 }
 
 .card-content {
-  background-color: #ffffff;
+  background-color: var(--main-text-color);
   box-shadow: 0px 0px 4px;
   height: 250px;
   width: 100%;
@@ -92,13 +100,12 @@ body {
 
 .line {
   width: 100%;
-  /* display: flex; */
   justify-content: flex-start;
   align-items: flex-start;
 }
 
 .card-right-side h3 {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   letter-spacing: 5px;
 }
 
@@ -107,7 +114,7 @@ body {
 }
 
 .card-right-side p {
-  font-family: 'poppins', sans-serif;
+  font-family: var(--main-font-family);
   font-size: 12px;
   letter-spacing: 3px;
   width: 80%;
@@ -130,8 +137,7 @@ body {
 }
 
 .card-date span {
-  /* background-color: red; */
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   font-size: 14px;
   margin: 20px 0;
   color: #6c6c6c;
@@ -147,8 +153,8 @@ body {
 .read-more button {
   border: none;
   padding: 8px 20px;
-  background-color: #7F0101;
-  color: #ffffff;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
   border-radius: 20px;
   cursor: pointer;
 }
@@ -219,7 +225,7 @@ body {
 
   .read-more a {
     text-decoration: none;
-    color: #7F0101;
+    color: var(--main-bg-color);
   }
 
   .card-image img {
@@ -236,7 +242,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
   margin: 60px 0;
 }
 
@@ -252,13 +257,13 @@ body {
 }
 
 .vertical-content {
-  background-color: #ffffff;
+  background-color: var(--main-text-color);
   box-shadow: 0px 0px 4px;
   height: 520px;
 }
 
 .dashboard-card-content {
-  background-color: #ffffff;
+  background-color: var(--main-text-color);
   box-shadow: 0px 0px 4px;
   height: 460px;
 }
@@ -277,11 +282,11 @@ body {
 }
 
 .vertical-right-side h3 {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
 }
 
 .vertical-right-side .description {
-  font-family: 'poppins', sans-serif;
+  font-family: var(--main-font-family);
   text-align: center;
   width: 100%;
   font-size: 11px;
@@ -302,20 +307,19 @@ body {
 
 .vertical-read-more a {
   text-decoration: none;
-  color: #7F0101;
+  color: var(--main-bg-color);
 }
 
 .vertical-card-date p {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   font-size: 12px;
   color: #6c6c6c;
 }
 
 .vertical-read-more p {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   font-size: 12px;
-  color: #7F0101;
-  /* text-decoration: underline; */
+  color: var(--main-bg-color);
 }
 
 
@@ -379,17 +383,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
 }
 
 .double-quote h1 {
   text-align: center;
   font-size: 100px;
-  color: #7F0101;
-  font-family: 'Lato', sans-serif;
+  color: var(--main-bg-color);
+  font-family: var(--main-font-lato);
   font-style: italic;
   margin-top: -10px;
-  /* background-color: red; */
 }
 
 .section-four-container p {
@@ -433,7 +435,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
   font-family: 'Pompiere', sans-serif;
 }
 
@@ -444,7 +445,7 @@ body {
 }
 
 .latest-content {
-  background-color: #ffffff;
+  background-color: var(--main-text-color);
   box-shadow: 0px 0px 4px;
 }
 
@@ -457,7 +458,6 @@ body {
 }
 
 .latest h1 {
-  /* background-color: red; */
   text-align: center;
   padding: 30px 0;
 }
@@ -487,14 +487,14 @@ body {
 /* Footer style */
 .Footer-container {
   width: 100%;
-  background-color: #7F0101;
+  background-color: var(--main-bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 30px 0;
   font-family: 'Pompiere', sans-serif;
   letter-spacing: 2px;
-  color: #ffffff;
+  color: var(--main-text-color);
   font-size: 18px;
 }
 
@@ -526,7 +526,7 @@ body {
 
 .social-icons a {
   margin: 0 10px;
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 @media screen and (max-width:390px) {
@@ -573,11 +573,11 @@ body {
 }
 
 .about-image {
-  border: 20px solid #ffffff;
+  border: 20px solid var(--main-text-color);
 }
 
 .about-text h1 {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   text-align: center;
   letter-spacing: 2px;
 }
@@ -631,7 +631,7 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 .contact h1 {
@@ -639,7 +639,7 @@ body {
   margin-top: 220px;
   display: flex;
   position: relative;
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   letter-spacing: 10px;
   font-size: 35px;
 }
@@ -649,18 +649,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
   padding: 20px 0;
 }
 
 .contactForm-content {
   width: 80%;
-  /* background-color: blue; */
 }
 
 .contactForm-content h2 {
   text-align: center;
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   padding: 20px 0;
 }
 
@@ -699,8 +697,8 @@ form textarea {
 .send-button button {
   width: 100%;
   padding: 12px 0;
-  background-color: #7F0101;
-  color: #ffffff;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
   border: none;
   cursor: pointer;
 }
@@ -761,7 +759,6 @@ form textarea {
 
 /* login style */
 .login-form-container {
-  /* margin: 150px 0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -769,14 +766,13 @@ form textarea {
 }
 
 .form-container {
-  /* width: 30%; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .form {
-  background-color: #ffffff;
+  background-color: var(--main-text-color);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
 }
@@ -784,7 +780,7 @@ form textarea {
 .form h1 {
   text-align: center;
   font-size: 18px;
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   margin-top: -2rem;
 }
 
@@ -792,7 +788,6 @@ form textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: absolute; */
 }
 
 .profile-input {
@@ -801,8 +796,8 @@ form textarea {
 
 .user-image {
   width: 70px;
-  background-color: #7F0101;
-  color: #ffffff;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
   border-radius: 50%;
   height: 70px;
   font-size: 40px;
@@ -819,7 +814,7 @@ form textarea {
 
 .email-container,
 .password-container label {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--main-font-lato);
   font-size: 16px;
   padding: 10px 0;
 }
@@ -846,13 +841,13 @@ form textarea {
 }
 
 .span {
-  color: #7F0101;
+  color: var(--main-bg-color);
   cursor: pointer;
 }
 
 .signupLogin {
   padding: 8px 40px;
-  background: #7F0101;
+  background: var(--main-bg-color);
   color: #EAEAEA;
   margin: 0 10px;
   border: none;
@@ -863,7 +858,7 @@ form textarea {
 .gray {
   background: #EAEAEA;
   color: #3c3c3c;
-  border: 1px solid #7F0101;
+  border: 1px solid var(--main-bg-color);
 }
 
 .create-account {
@@ -893,11 +888,6 @@ form textarea {
 
 
 .App {
-
-  /* width: 100vw; */
   height: 100vh;
-  /* display: flex; */
-  /* align-items: center; */
-  /* flex-direction: column; */
   font-family: "Nunito", sans-serif;
 }

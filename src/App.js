@@ -1,6 +1,11 @@
 // Import necessary modules
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import "./App.css";
@@ -11,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import AddNew from "./components/Dashboard/AddNew";
 import Chart from "./components/Dashboard/Chart";
 import ProtectedRoute from "./components/ProtectedRoute"; // Ensure you have this component defined
+import Analytics from "./components/Dashboard/Analytics";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
@@ -29,6 +35,7 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/Blog/:_id" component={SingleBlog} />
           <Route path="/add new blog" component={AddNew} />
+          <Route path="/Analytics" component={Analytics} />
 
           {/* Protected routes for admin */}
           <ProtectedRoute
@@ -38,8 +45,14 @@ function App() {
             userRole={userRole}
           />
           <ProtectedRoute
-            path="/dashboard"
+            path="/post"
             component={Dashboard}
+            isAuthenticated={isAuthenticated()}
+            userRole={userRole}
+          />
+          <ProtectedRoute
+            path="/analytics"
+            component={Analytics}
             isAuthenticated={isAuthenticated()}
             userRole={userRole}
           />

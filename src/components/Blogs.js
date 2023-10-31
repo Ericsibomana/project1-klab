@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+<<<<<<< HEAD
 
 function Blogs() {
   // Declaring useState
   // Declaring useState
+=======
+import { baseUrl } from "./config";
+
+function Blogs() {
+>>>>>>> ff35009 (chart)
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch("https://my-first-blog-apis.onrender.com/api/posts/read")
+=======
+    fetch(`${baseUrl}/posts/read`)
+>>>>>>> ff35009 (chart)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

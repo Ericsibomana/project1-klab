@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars,faUser} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./dashboard.css";
 
@@ -30,30 +30,25 @@ const DashboardNavBar = () => {
             <div className="logo-dashboard">
               <h2>Up</h2>
             </div>
-            <div className="title">
-            </div>
+            <div className="title"></div>
           </div>
           <div className="menu-icon" onClick={handleShowNavbar}>
             <FontAwesomeIcon icon={faBars} size="2x" />
           </div>
           <div className={`nav-elements ${showNavbar && "active"}`}>
-            <ul className="nav-link">  
-             <li >
-             <Link to="/chart">DASHBOARD</Link>
-             </li>
-             <li className="link">
-             <Link to="/dashboard">POST</Link>
-             </li>
+            <ul className="nav-link">
               <li>
-                <Link to="/contact" className='profile'>
-                 <div className="profile-container">
-                 PROFILE <FontAwesomeIcon icon={faUser} className="user-icon"/>
-                 </div>
-                </Link>
+                <Link to="/chart">DASHBOARD</Link>
+              </li>
+              <li>
+                <Link to="/analytics">ANALYTICS</Link>
+              </li>
+              <li className="link">
+                <Link to="/post">POST</Link>
               </li>
               <li>
                 <Link to="/" onClick={handleLogout}>
-                   LOGOUT
+                  LOGOUT
                 </Link>
               </li>
             </ul>
@@ -64,4 +59,4 @@ const DashboardNavBar = () => {
   );
 };
 
-export default DashboardNavBar ;
+export default DashboardNavBar;

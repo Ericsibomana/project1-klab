@@ -19,6 +19,7 @@ function Card({ cardData }) {
         <div className="card-description">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <p>{cardData.PostContent.substring(0, 200)}...</p>
 =======
             <p>{cardData.PostContent.substring(0, 100)}...</p>
@@ -26,11 +27,13 @@ function Card({ cardData }) {
 =======
             <p>{cardData.PostContent ? cardData.PostContent.substring(0, 100) : ''}...</p>
 >>>>>>> cdbd02f (fix on create new posts)
+=======
+        <p dangerouslySetInnerHTML={{__html: cardData.PostContent ? `${cardData.PostContent.substring(0, 150)}...` : '' }}></p>
+>>>>>>> ff35009 (chart)
         </div>
         <div className="card-bottom">
           <div className="card-date">
             <p>
-              {/* <img src={cardData.creatorprofile} alt="profile" className='creatorProfile'/> */}
               <span>By {cardData.creator}</span>
               <span> | </span>
               <span>{cardData.PostedDate ? cardData.PostedDate.substring(0, 10) : ''}</span>

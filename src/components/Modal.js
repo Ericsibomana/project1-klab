@@ -4,11 +4,8 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faTimes } from "@fortawesome/free-solid-svg-icons";
 // import Navbar from '../components/NavBar/NavBar';
-<<<<<<< HEAD
 import { Link, useHistory } from "react-router-dom";
-=======
-import { useHistory } from "react-router-dom"
->>>>>>> 5310ced (fix authentication and new features)
+import { baseUrl } from "./config";
 
 // toast
 import { ToastContainer, toast } from "react-toastify";
@@ -33,10 +30,6 @@ function Modal({ setOpenModal }) {
     password,
     profile,
   };
-  const LoginData = {
-    email,
-    password,
-  };
 
   // form validationForm
   function validateForm() {}
@@ -44,16 +37,13 @@ function Modal({ setOpenModal }) {
 
   const handlesignup = async (data) => {
     try {
-      const response = await fetch(
-        "https://my-first-blog-apis.onrender.com/api/users/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data), // Use FormData directly without wrapping it in an object
-        }
-      );
+      const response = await fetch(`${baseUrl}/users/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), // Use FormData directly without wrapping it in an object
+      });
 
       if (firstname.length == 0) {
         toast("First Name can not be empty");
@@ -171,147 +161,52 @@ function Modal({ setOpenModal }) {
     } catch (error) {
       console.error("Error:", error);
     }
+  };
 
-    if (firstname.length == 0) {
-      toast("Invalid Form, First Name can not be empty");
-      return;
-    }
-    if (lastname.length == 0) {
-      toast("Invalid Form, Last Name can not be empty");
-      return;
-    }
-    if (email.length == 0) {
-      toast("Invalid Form, Email Address can not be empty");
-      return;
-    }
-    if (password.length < 8) {
-      toast(
-        "Invalid Form, Password must contain greater than or equal to 8 characters."
-      );
-      return;
-    }
+  const handleLogin = async (data) => {
+    try {
+      const response = await fetch(`${baseUrl}/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    // variable to count upper case characters in the password.
-    let countUpperCase = 0;
-    // variable to count lowercase characters in the password.
-    let countLowerCase = 0;
-    // variable to count digit characters in the password.
-    let countDigit = 0;
-    // variable to count special characters in the password.
-    let countSpecialCharacters = 0;
+      if (email.length == 0) {
+        toast("Email can not be empty");
+        return;
+      } else if (password.length == 0) {
+        toast("Password can not be empty");
+        return;
+      } else if (response.ok) {
+        const loginResponse = await response.json();
+        const userData = loginResponse.userModel;
 
-    for (let i = 0; i < password.length; i++) {
-      const specialChars = [
-        "!",
-        "@",
-        "#",
-        "$",
-        "%",
-        "^",
-        "&",
-        "*",
-        "(",
-        ")",
-        "_",
-        "-",
-        "+",
-        "=",
-        "[",
-        "{",
-        "]",
-        "}",
-        ":",
-        ";",
-        "<",
-        ">",
-      ];
+        if (userData.role === "admin") {
+          // Redirect to the dashboard for admin
+          history.push("/chart");
+        } else if (userData.role === "user") {
+          // Redirect to the home page for users
+          history.push("/");
+        } else {
+          // Handle other roles or scenarios as needed
+          toast("Invalid role");
+        }
 
-      if (specialChars.includes(password[i])) {
-        // this means that the character is special, so increment countSpecialCharacters
-        countSpecialCharacters++;
-      } else if (!isNaN(password[i] * 1)) {
-        // this means that the character is a digit, so increment countDigit
-        countDigit++;
+        toast("Login successful");
+        setOpenModal(false);
+        localStorage.setItem("token", loginResponse.token);
+        setEmail("");
+        setPassword("");
       } else {
-        if (password[i] == password[i].toUpperCase()) {
-          // this means that the character is an upper case character, so increment countUpperCase
-          countUpperCase++;
-        }
-        if (password[i] == password[i].toLowerCase()) {
-          // this means that the character is lowercase, so increment countUpperCase
-          countLowerCase++;
-        }
+        toast("Invalid Email or Password");
       }
-    }
-
-    if (countLowerCase == 0) {
-      // invalid form, 0 lowercase characters
-      alert("Invalid Form, 0 lower case characters in password");
-      return;
-    }
-
-    if (countUpperCase == 0) {
-      // invalid form, 0 upper case characters
-      alert("Invalid Form, 0 upper case characters in password");
-      return;
-    }
-
-    if (countDigit == 0) {
-      // invalid form, 0 digit characters
-      alert("Invalid Form, 0 digit characters in password");
-      return;
-    }
-
-    if (countSpecialCharacters == 0) {
-      // invalid form, 0 special characters characters
-      alert("Invalid Form, 0 special characters in password");
-      return;
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
-    const handleLogin = async (data) => {
-      try {
-          const response = await fetch('https://my-first-blog-apis.onrender.com/api/users/login', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data),
-          });
-  
-          if (email.length == 0) {
-              toast('Email can not be empty');
-              return;
-          } else if (password.length == 0) {
-              toast('Password can not be empty');
-              return;
-          } else if (response.ok) {
-              const loginResponse = await response.json();
-              const userData = loginResponse.userModel;
-  
-              if (userData.role === "admin") {
-                  // Redirect to the dashboard for admin
-                  history.push('/dashboard');
-              } else if (userData.role === "user") {
-                  // Redirect to the home page for users
-                  history.push('/');
-              } else {
-                  // Handle other roles or scenarios as needed
-                  toast('Invalid role');
-              }
-  
-              toast("Login successful");
-              localStorage.setItem("token", loginResponse.token);
-              setEmail('');
-              setPassword('');
-          } else {
-              toast('Invalid Email or Password');
-          }
-      } catch (error) {
-          console.error('Error:', error);
-      }
-  };
-  
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -410,7 +305,6 @@ function Modal({ setOpenModal }) {
                       onClick={(e) => {
                         e.preventDefault();
                         handleLogin(LoginData);
-                        validateForm();
                       }}
                     >
                       Login
@@ -427,7 +321,6 @@ function Modal({ setOpenModal }) {
                       onClick={(e) => {
                         e.preventDefault();
                         handlesignup(FormData);
-                        validateForm();
                       }}
                     >
                       Sign Up
