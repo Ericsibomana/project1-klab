@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars,faUser} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./dashboard.css";
 
@@ -12,6 +12,16 @@ const DashboardNavBar = () => {
     setShowNavbar(!showNavbar);
   };
 
+  const history = useHistory();
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+      localStorage.removeItem("token");
+      history.push("/");
+    }
+  };
+
   return (
     <header>
       <nav className={`navbar ${showNavbar && "responsive"}`}>
@@ -20,24 +30,25 @@ const DashboardNavBar = () => {
             <div className="logo-dashboard">
               <h2>Up</h2>
             </div>
-            <div className="title">
-            </div>
+            <div className="title"></div>
           </div>
           <div className="menu-icon" onClick={handleShowNavbar}>
             <FontAwesomeIcon icon={faBars} size="2x" />
           </div>
           <div className={`nav-elements ${showNavbar && "active"}`}>
-            <ul>   
+            <ul className="nav-link">
               <li>
-                <Link to="/contact" className='profile'>
-                 <div className="profile-container">
-                 Profile <FontAwesomeIcon icon={faUser} className="user-icon"/>
-                 </div>
-                </Link>
+                <Link to="/chart">DASHBOARD</Link>
               </li>
               <li>
-                <Link to="/">
-                  <button className="login">Logout</button>
+                <Link to="/analytics">ANALYTICS</Link>
+              </li>
+              <li className="link">
+                <Link to="/post">POST</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={handleLogout}>
+                  LOGOUT
                 </Link>
               </li>
             </ul>
@@ -48,4 +59,4 @@ const DashboardNavBar = () => {
   );
 };
 
-export default DashboardNavBar ;
+export default DashboardNavBar;
